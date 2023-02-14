@@ -1,4 +1,4 @@
-@icon("res://addons/fsm/state.svg")
+@icon("res://addons/fsm/state.png")
 extends Node
 class_name State
 
