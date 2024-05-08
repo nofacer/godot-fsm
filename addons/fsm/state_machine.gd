@@ -7,7 +7,7 @@ class_name StateMachine
 
 var cur_state: State
 var _map: Dictionary = {}
-
+var store: Dictionary = {}
 
 func _ready():
 	if init_state.is_empty():
@@ -18,7 +18,6 @@ func _ready():
 			child.target = _target_node
 			_map[child.name] = child
 	cur_state = get_node(init_state) as State
-
 
 func transition_to(state_name: String):
 	cur_state.exit()
