@@ -22,7 +22,6 @@ func update(_delta: float):
 	if direction == Vector2i(0, 0):
 		self.state_machine.transition_to("IdleState")
 	elif Input.is_action_pressed("run"):
-		print(66)
 		self.state_machine.transition_to("RunState")
 	else:
 		player.position += direction * 100 * _delta

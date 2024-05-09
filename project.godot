@@ -15,6 +15,14 @@ run/main_scene="res://fsm-example/example.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=300
+window/size/window_width_override=1200
+window/size/window_height_override=900
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fsm/plugin.cfg")
