@@ -10,18 +10,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	state_machine.cur_state.update(delta)
-	if "direction" in state_machine.store:
-		var direction: Vector2 = state_machine.store["direction"]
-		if direction.x < 0 and !is_flip_h():
-			flip_h()
-		elif direction.x > 0 and is_flip_h():
-			flip_h()
-
+	
 func play_animation(animation_name: String):
 	animator.play(animation_name)
 
-func is_flip_h() -> bool:
-	return animator.flip_h
+func get_move_direction() -> Vector2:
+	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	return input_direction
 
-func flip_h():
-	animator.flip_h = !animator.flip_h
+func flip_based_on_direction(direction: Vector2):
+	if direction.x != 0:
+		animator.flip_h = direction.x < 0

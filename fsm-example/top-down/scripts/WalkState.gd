@@ -1,30 +1,23 @@
 extends State
 
+var speed := 100
+
 func enter(_msg: Dictionary={}) -> void:
 	var player: TopDownPlayer = self.target
 	player.play_animation("walk")
 
 func update(_delta: float):
-	var direction = Vector2i(0, 0)
-	if Input.is_action_pressed("ui_up"):
-		direction += Vector2i(0, -1)
-	if Input.is_action_pressed("ui_down"):
-		direction += Vector2i(0, 1)
-	if Input.is_action_pressed("ui_left"):
-		direction += Vector2i( - 1, 0)
-	if Input.is_action_pressed("ui_right"):
-		direction += Vector2i(1, 0)
+	var player: TopDownPlayer = self.target
+	var direction := player.get_move_direction()
+	player.flip_based_on_direction(direction)
+	player.position += direction * self.speed * _delta
 	
-	self.state_machine.store["direction"] = direction
-	
-	var player = self.target as TopDownPlayer
-	
-	if direction == Vector2i(0, 0):
+	if direction == Vector2(0, 0):
 		self.state_machine.transition_to("IdleState")
-	elif Input.is_action_pressed("run"):
+		return
+	if Input.is_action_pressed("run"):
 		self.state_machine.transition_to("RunState")
-	else:
-		player.position += direction * 100 * _delta
+		return
 
 func exit():
 	pass
