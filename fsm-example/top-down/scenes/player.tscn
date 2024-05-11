@@ -1,15 +1,18 @@
-[gd_scene load_steps=31 format=3 uid="uid://c1vqxjsxyhonk"]
+[gd_scene load_steps=36 format=3 uid="uid://c1vqxjsxyhonk"]
 
 [ext_resource type="Texture2D" uid="uid://bd7sey4vgq8i0" path="res://fsm-example/top-down/assets/idle/1.png" id="1_lqmya"]
 [ext_resource type="Script" path="res://fsm-example/top-down/scripts/player.gd" id="1_ooknf"]
 [ext_resource type="Texture2D" uid="uid://c0xvx6qkrmhjo" path="res://fsm-example/top-down/assets/idle/2.png" id="2_5klmr"]
+[ext_resource type="Texture2D" uid="uid://0se40nbkrlos" path="res://fsm-example/top-down/assets/dash/1.png" id="2_qekp1"]
 [ext_resource type="Texture2D" uid="uid://b83g155jclxv2" path="res://fsm-example/top-down/assets/idle/3.png" id="3_6n7ei"]
+[ext_resource type="Texture2D" uid="uid://0cf4u2345ts5" path="res://fsm-example/top-down/assets/dash/2.png" id="3_bvmwn"]
 [ext_resource type="Texture2D" uid="uid://dys8s86pa27dg" path="res://fsm-example/top-down/assets/idle/4.png" id="4_2emht"]
+[ext_resource type="Texture2D" uid="uid://bn1hcfeo1rn86" path="res://fsm-example/top-down/assets/dash/3.png" id="4_urol4"]
 [ext_resource type="Texture2D" uid="uid://dfkfaf8xyo60v" path="res://fsm-example/top-down/assets/idle/5.png" id="5_ortp6"]
+[ext_resource type="Texture2D" uid="uid://b8j03nfs84w33" path="res://fsm-example/top-down/assets/dash/4.png" id="5_wpv61"]
 [ext_resource type="Texture2D" uid="uid://uqrw5i3aki4d" path="res://fsm-example/top-down/assets/idle/6.png" id="6_80jkq"]
 [ext_resource type="Texture2D" uid="uid://45j0ldefkrgd" path="res://fsm-example/top-down/assets/idle/7.png" id="7_oyepa"]
 [ext_resource type="Texture2D" uid="uid://cris2uwhe0h7v" path="res://fsm-example/top-down/assets/run/1.png" id="9_6pvye"]
-[ext_resource type="Script" path="res://addons/fsm/state_machine.gd" id="9_7sjhf"]
 [ext_resource type="Texture2D" uid="uid://ldw7wmvpr2o5" path="res://fsm-example/top-down/assets/walk/1.png" id="9_63ueq"]
 [ext_resource type="Texture2D" uid="uid://cao2dd3juliy" path="res://fsm-example/top-down/assets/run/2.png" id="10_cqyxw"]
 [ext_resource type="Script" path="res://fsm-example/top-down/scripts/IdleState.gd" id="10_i57m2"]
@@ -28,9 +31,28 @@
 [ext_resource type="Texture2D" uid="uid://byotf1qadx050" path="res://fsm-example/top-down/assets/run/8.png" id="16_a0q8c"]
 [ext_resource type="Texture2D" uid="uid://djijsl0ce6l1" path="res://fsm-example/top-down/assets/walk/8.png" id="16_gx4e5"]
 [ext_resource type="Script" path="res://fsm-example/top-down/scripts/RunState.gd" id="28_yp3qe"]
+[ext_resource type="Script" path="res://addons/fsm/state_machine.gd" id="29_5h6jy"]
+[ext_resource type="Script" path="res://fsm-example/top-down/scripts/DashState.gd" id="33_fgyya"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ewbij"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qekp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bvmwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_urol4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wpv61")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_lqmya")
@@ -123,16 +145,18 @@ size = Vector2(14, 20)
 script = ExtResource("1_ooknf")
 
 [node name="Animator" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_ewbij")
-animation = &"idle"
-frame_progress = 0.912263
+animation = &"dash"
+frame = 3
+frame_progress = 0.109868
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_hosu5")
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("9_7sjhf")
+script = ExtResource("29_5h6jy")
 init_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine"]
@@ -143,3 +167,6 @@ script = ExtResource("11_x0lwy")
 
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("28_yp3qe")
+
+[node name="DashState" type="Node" parent="StateMachine"]
+script = ExtResource("33_fgyya")
