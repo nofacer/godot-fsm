@@ -13,17 +13,16 @@ func update(_delta: float):
 	player.position += direction * self.speed * _delta
 	
 	if direction == Vector2(0, 0):
-		self.state_machine.transition_to("IdleState")
+		self.translate_to("IdleState")
 		return
 
 	if Input.is_action_just_pressed("dash"):
-		self.state_machine.store["direction"] = direction
-		self.state_machine.store["pre_state"] = self.get_name()
-		self.state_machine.transition_to("DashState")
+		self.set_store("dash_direction", direction)
+		self.translate_to("DashState")
 		return
 	
 	if !Input.is_action_pressed("run"):
-		self.state_machine.transition_to("WalkState")
+		self.translate_to("WalkState")
 		return
 	
 func exit():

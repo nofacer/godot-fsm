@@ -10,7 +10,7 @@ func update(_delta: float):
 
 	if direction.length() > 0:
 		var next_state: String = "RunState" if Input.is_action_pressed("run") else "WalkState"
-		self.state_machine.transition_to(next_state)
+		self.translate_to(next_state)
 
 func exit():
 	pass

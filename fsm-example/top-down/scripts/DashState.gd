@@ -11,12 +11,12 @@ func enter(_msg: Dictionary={}) -> void:
 
 func update(_delta: float):
 	var player: TopDownPlayer = self.target
-	var direction = self.state_machine.store["direction"]
-	var distance: Vector2 = direction * self.speed * _delta
+	var dash_direction = self.get_store("dash_direction")
+	var distance: Vector2 = dash_direction * self.speed * _delta
 	player.position += distance
 	cur_distance += distance.length()
 	if cur_distance >= dash_distance:
-		self.state_machine.transition_to(self.state_machine.store["pre_state"])
+		self.translate_to_previous_state()
 
 func exit():
 	pass
