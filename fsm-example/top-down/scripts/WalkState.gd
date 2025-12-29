@@ -8,7 +8,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.play_animation("walk")
 
 
-func update(_delta: float):
+func physics_update(_delta: float):
 	var player: TopDownPlayer = self.target
 	var direction := player.get_move_direction()
 	player.flip_based_on_direction(direction)

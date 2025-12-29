@@ -29,7 +29,18 @@ func _init_states():
 
 
 func _process(delta: float) -> void:
-	self.cur_state.update(delta)
+	if cur_state:
+		cur_state.update(delta)
+
+
+func _physics_process(delta: float) -> void:
+	if cur_state:
+		cur_state.physics_update(delta)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if cur_state:
+		cur_state.handle_input(event)
 
 
 func transition_to(state_name: String):

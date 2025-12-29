@@ -11,7 +11,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.play_animation("dash")
 
 
-func update(_delta: float):
+func physics_update(_delta: float):
 	var player: TopDownPlayer = self.target
 	var dash_direction = self.get_store("dash_direction")
 	var distance: Vector2 = dash_direction * self.speed * _delta

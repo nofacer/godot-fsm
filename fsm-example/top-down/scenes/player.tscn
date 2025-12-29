@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c1vqxjsxyhonk"]
+[gd_scene format=3 uid="uid://c1vqxjsxyhonk"]
 
 [ext_resource type="Texture2D" uid="uid://bd7sey4vgq8i0" path="res://fsm-example/top-down/assets/idle/1.png" id="1_lqmya"]
 [ext_resource type="Script" uid="uid://26tk6e0utmde" path="res://fsm-example/top-down/scripts/player.gd" id="1_ooknf"]
@@ -141,32 +141,32 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hosu5"]
 size = Vector2(14, 20)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1774044243]
 script = ExtResource("1_ooknf")
 
-[node name="Animator" type="AnimatedSprite2D" parent="."]
+[node name="Animator" type="AnimatedSprite2D" parent="." unique_id=1374971251]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_ewbij")
 animation = &"dash"
 frame = 3
 frame_progress = 0.109868
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=723789587]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_hosu5")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." unique_id=1390828239]
 script = ExtResource("29_5h6jy")
 init_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1779814158]
 script = ExtResource("10_i57m2")
 
-[node name="WalkState" type="Node" parent="StateMachine"]
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=1017653209]
 script = ExtResource("11_x0lwy")
 
-[node name="RunState" type="Node" parent="StateMachine"]
+[node name="RunState" type="Node" parent="StateMachine" unique_id=915647961]
 script = ExtResource("28_yp3qe")
 
-[node name="DashState" type="Node" parent="StateMachine"]
+[node name="DashState" type="Node" parent="StateMachine" unique_id=8878713]
 script = ExtResource("33_fgyya")
